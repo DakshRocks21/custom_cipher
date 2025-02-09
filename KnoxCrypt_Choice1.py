@@ -1,3 +1,9 @@
+"Done by Daksh"
+
+"""
+XOR + Knapsack Cipher with BB84 Quantum Key Exchange
+"""
+
 import random
 from math import gcd
 
@@ -205,5 +211,5 @@ class TwoWayKnapsackWithBB84:
         alice_received_message = self.alice.binary_to_text(alice_received_binary)
         print(f"Alice Decrypts and Receives: {alice_received_message}\n")
 
-system = TwoWayKnapsackWithBB84(bit_length=32, toggle_eve=False)
-system.run()
+protocol = TwoWayKnapsackWithBB84(bit_length=32, toggle_eve=False)
+protocol.run()
