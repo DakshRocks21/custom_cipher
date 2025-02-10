@@ -61,7 +61,6 @@ class BB84:
         alice_key = self.extract_key(alice_bits, matching_indices)
         bob_key = self.extract_key(bob_measured_bits, matching_indices)
 
-        # Take a random sample for error checking.
         sample_size = min(10, len(alice_key)) 
         if sample_size > 0:
             sample_indices = random.sample(range(len(alice_key)), sample_size)
@@ -75,9 +74,16 @@ class BB84:
         print(f"Bob's Key        : {bob_key}")
         print(f"Error Rate       : {error_rate}")
 
-        if alice_key == bob_key and len(alice_key) > 0:
+        if alice_sample == bob_sample:
             print("\n[BB84] Key Exchange Successful!\n")
+            
+            if alice_key == bob_key:
+                print("[BB84] Key was succesfully exchanged, and are exactly the same")
+            else:
+                print("[BB84] The random bits compared was the same, however the key does not match.")
+                print("[BB84] In realty, we would use classical error correction to fix this issue.")
             return alice_key, bob_key
+        
         else:
             if self.overide:
                 print("\n[BB84] Key Exchange Failed. Overriding...\n")

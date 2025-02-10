@@ -69,9 +69,16 @@ class BB84:
         print(f"Bob's Key        : {bob_key}")
         print(f"Error Rate       : {error_rate}")
 
-        if alice_key == bob_key:
+        if alice_sample == bob_sample:
             print("\n[BB84] Key Exchange Successful!\n")
+            
+            if alice_key == bob_key:
+                print("[BB84] Key was succesfully exchanged, and are exactly the same")
+            else:
+                print("[BB84] The random bits compared was the same, however the key does not match.")
+                print("[BB84] In realty, we would use classical error correction to fix this issue.")
             return alice_key, bob_key
+        
         else:
             if self.overide:
                 print("\n[BB84] Key Exchange Failed. Overriding...\n")

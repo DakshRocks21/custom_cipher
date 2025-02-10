@@ -63,16 +63,22 @@ class BB84:
         print(f"Bob's Key        : {bob_key}")
         print(f"Error Rate       : {error_rate}")
 
-        if alice_key == bob_key:
+        if alice_sample == bob_sample:
             print("\n[BB84] Key Exchange Successful!\n")
+            
+            if alice_key == bob_key:
+                print("\nKey was succesfully exchanged, and are exactly the same\n")
+            else:
+                print("The random bits compared was the same, however the key does not match.")
             return alice_key, bob_key
+                
         else:
             if self.override:
                 print("\n[BB84] Key Exchange Failed. Overriding...\n")
                 return alice_key, bob_key
             
-            print("\n[BB84] Key Exchange Failed. Retrying...\n")
+            print("\n[BB84] Key Exchange Failed.\n")
             return "", ""
 
-bb84 = BB84(bit_length=32, toggle_eve=False)
+bb84 = BB84(bit_length=32, toggle_eve=True)
 alice_key, bob_key = bb84.simulate()
